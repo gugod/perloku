@@ -27,11 +27,10 @@ if [ -f $BUILD_DIR/Makefile.PL ] || [ -f $BUILD_DIR/cpanfile ]; then
   VENDOR_DEPS="$BUILD_DIR/vendor/perl-deps"
   CACHE_DEPS="$CACHE_DIR/$PERL_VERSION/perl-deps"
   CPANM="perl -S $(which cpanm) -l $CACHE_DEPS"
+  alias cpanm_to_cache = $CPANM
 
   mkdir -p "$CACHE_DIR"
   $CPANM --notest --installdeps "$BUILD_DIR" 2>&1 | indent
-  $CPANM --notest Net::SMTP::TLS 2>&1 | indent
-  $CPANM --notest Net::SSLeay 2>&1 | indent
 
   cp -R "$CACHE_DEPS" "$VENDOR_DEPS"
 
